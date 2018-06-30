@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load mathfilters %}
 <html>
 <head>
 <title>mysite</title>
@@ -19,15 +19,15 @@
 		</div>
 		<div id="content">
 			<div id="guestbook">
-				<form action="/guestbook" method="post">
+				<form action="/guestbook/add" method="post">{% csrf_token %} <!--forbidden 403 error 처리tokens-->
 					<input type="hidden" name="a" value="insert">
 					<table>
 						<tr>
 							<td>이름</td><td><input type="text" name="name"></td>
-							<td>비밀번호</td><td><input type="password" name="pass"></td>
+							<td>비밀번호</td><td><input type="password" name="password"></td>
 						</tr>
 						<tr>
-							<td colspan=4><textarea name="content" id="content">텍스트영역</textarea></td>
+							<td colspan=4><textarea name="content" id="content"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
@@ -36,20 +36,23 @@
 				</form>
 				<ul>
 					<li>
+						{% for guestbook in guestbook_list %}
 						<table>
 							<tr>
-								<td>[4]</td>
-								<td>안대혁</td>
-								<td>2015-11-10 11:22:30</td>
-								<td><a href="">삭제</a></td>
+								<td>{{ guestbook_list.count | add:1 | sub:forloop.counter }}</td>
+								<td>{{ guestbook.name}}</td>
+								<td>{{ guestbook.regdate|date:'Y-m-d H:i:s' }}</td>
+								<td><a href="/guestbook/deleteform?id={{ guestbook.id }}">삭제</a></td>
+										<!--href는 이동할 페이지 주소 guestbook app에서 id값을 받음-->
 							</tr>
 							<tr>
 								<td colspan=4>
-								안녕하세요. ^^;<br>
-								하하하하	
+								{{ guestbook.text|linebreaksbr }}
 								</td>
 							</tr>
+
 						</table>
+						{% endfor %}
 						<br>
 					</li>
 				</ul>
@@ -57,9 +60,9 @@
 		</div>
 		<div id="navigation">
 			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/">안대혁</a></li>
+				<li><a href="/guestbook">방명록</a></li>
+				<li><a href="/board">게시판</a></li>
 			</ul>
 		</div>
 		<div id="footer">

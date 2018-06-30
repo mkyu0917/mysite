@@ -30,13 +30,19 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [ #라이브러리 , 패키지등록해야 쓸 수 있음.
+    'main',
+    'guestbook', #mysite는 django프로젝트에 guestbook 앱을 추가함, mysite에서 앱사용가능
+    'user',
+    'board',
+    'mathfilters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions', #로그인 세션에서 필여함
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -54,7 +60,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # 템플릿의 베이스dir을 기본경로로 지정해서 뒤에 주소만 적으면됨
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +131,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'statics'),
 )
 STATIC_URL = '/assets/'
+
+#session
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
