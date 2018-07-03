@@ -5,7 +5,7 @@
 {% block content %}
 <div id="board">
 	<form class="board-form" method="post" action="/board/boardWrite_Save">{% csrf_token %} <!--포스트방식으로 값을 /board에 전달-->
-		<input type = "hidden" name = "a" value="write"> <!--write 값전달-->
+		<input type = "hidden" name = "a" value="request.session['authuser']"> <!--write 값전달-->
 		<table class="tbl-ex">
 			<tr>
 				<th colspan="2">글쓰기</th>
@@ -22,7 +22,7 @@
 			</tr>
 		</table>
 		<div class="bottom">
-			<a href="/board">취소</a>
+			<a href="/board/">취소</a>
 			<input type="submit" value="등록">
 		</div>
 	</form>

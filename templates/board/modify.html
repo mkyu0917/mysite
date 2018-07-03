@@ -4,7 +4,8 @@
 {% endblock %}
 {% block content %}
 <div id="board">
-	<form class="board-form" method="post" action="/board/boardmodify_Save">{% csrf_token %}
+	<form class="board-form" method="post" action="/board/modify_Save">{% csrf_token %}
+
 		<table class="tbl-ex">
 			<tr>
 				<th colspan="2">글수정</th>

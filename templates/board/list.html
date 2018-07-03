@@ -44,6 +44,10 @@
 		<div class="bottom">
 			<a href="/board/write" id="new-book">글쓰기</a> <!--write페이지 호출-->
 		</div>
+		{% elif request.session.authuser is None%}
+		<div class="bottom">
+			<a href="/user/loginform" id="new-book">글쓰기</a> <!--write페이지 호출-->
+		</div>
 		{% endif %}
 	</div>
 </div>

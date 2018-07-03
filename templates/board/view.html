@@ -24,7 +24,10 @@
 		   </table>
 		   <div class="bottom">
 			  <a href="/board">글목록</a>
+			{% if request.session.authuser.id == boardViews.user_id %}
+		   <div class="bottom">
 			  <a href="/board/modify?id={{boardViews.id}}">글수정</a>
+			 {% endif %}
 		   </div>
 		</div>
 {% endblock %}
