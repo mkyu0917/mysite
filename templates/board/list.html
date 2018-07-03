@@ -1,70 +1,50 @@
+{% extends "../base.html" %}
 {% load mathfilters %}
-<!DOCTYPE html>
-<html>
-<head>
-<title>mysite</title>
+
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+{% block css_link %}
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-			   {% if request.session.authuser is None %}
-				    <li><a href="/user/loginform">로그인</a><li>
-				    <li><a href="/user/joinform">회원가입</a><li>
-                {% else %}
-				    <li><a href="/user/modifyform">회원정보수정</a><li>
-				    <li><a href="/user/logout">로그아웃</a><li>
-				    <li>{{  request.session.authuser.name }}님 안녕하세요 ^^;</li>
-                {% endif %}
-			</ul>
-		</div>
-		<div id="content">
-			<div id="board">
-				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value="">
-					<input type="submit" value="찾기">
-				</form>
+{% endblock %}
+{% block content %}
+<div id="content">
+	<div id="board">
+		<form id="search_form" action="/board/view" method="post">
+			<input type="text" id="kwd" name="kwd" value="">
+			<input type="submit" value="찾기">
+		</form>
 
-				<table class="tbl-ex">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>조회수</th>
-						<th>작성일</th>
-						<th>&nbsp;</th>
-					</tr>
-					{% for boardlist in boardLists %}
-					<tr>
-						<td>{{ bookList.count | add:1 | sub:forloop.counter}}</td>
-						<td><a href="/board/view">{{ boardlist.title }}</a></td>
-						<td>{{ boardlist.name }}</td>
-						<td>{{ boardlist.hit  }}</td>
-						<td>{{ boardlist.regdate|date:'Y-m-d H:i:s' }}</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					{% endfor %}
-				</table>
+		<table class="tbl-ex">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>글쓴이</th>
+				<th>조회수</th>
+				<th>작성일</th>
+				<th>&nbsp;</th>
+			</tr>
+			{% for boardlist in boardLists %}
+			<tr>
+				<td>{{ boardlist.id}}</td>
+				<td>{% if request.session.authuser is not None %}
+					<a href="/board/view?id={{ boardlist.id }}">
+					 {% endif %}{{ boardlist.title }}</a>
 
 
-				<div class="bottom">
-					<a href="/board/write" id="new-book">글쓰기</a> <!--write페이지 호출-->
-				</div>				
-			</div>
+				</td><!--어류동-->
+				<td>{{ boardlist.name }}</td>
+				<td>{{ boardlist.hit  }}</td>
+				<td>{{ boardlist.regdate|date:'Y-m-d H:i:s' }}</td>
+				<td><a href="" class="del">삭제</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		{% if request.session.authuser is not None %} <!-- 이것은 버튼 숨기기 -->
+		<div class="bottom">
+			<a href="/board/write" id="new-book">글쓰기</a> <!--write페이지 호출-->
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="/">김민규</a></li>
-				<li><a href="/guestbook">방명록</a></li>
-				<li><a href="/board">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
+		{% endif %}
 	</div>
-</body>
-</html>
+</div>
+{% endblock %}
