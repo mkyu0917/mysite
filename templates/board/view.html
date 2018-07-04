@@ -27,7 +27,8 @@
 	  <a href="/board">글목록</a>
 
 	{% if request.session.authuser.id == boardViews.user_id %}
-   	  <a href="/board/modify?id={{boardViews.id}}">글수정</a>
+   	  <a href="/board/modify?id={{ boardViews.id }}">글수정</a>
+	  <input type="hidden" id="kwd" name="kwd" value="request.session.['authuser']">
 	{% endif %}
    </div>
 </div>

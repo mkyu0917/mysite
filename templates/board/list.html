@@ -21,11 +21,11 @@
 				<th>글쓴이</th>
 				<th>조회수</th>
 				<th>작성일</th>
-				<th>&nbsp;</th>
+				<th>삭제</th>
 			</tr>
 			{% for boardlist in boardLists %}
 			<tr>
-				<td>{{ boardlist.id}}</td>
+				<td>{{boardlist.id}}</td>
 				<td>{% if request.session.authuser is not None %}
 					<a href="/board/view?id={{ boardlist.id }}">
 					 {% endif %}{{ boardlist.title }}</a>
@@ -35,7 +35,8 @@
 				<td>{{ boardlist.name }}</td>
 				<td>{{ boardlist.hit  }}</td>
 				<td>{{ boardlist.regdate|date:'Y-m-d H:i:s' }}</td>
-				<td><a href="" class="del">삭제</a></td>
+					{% if request.session.authuser}
+				<td><a href="/board/list_Delete?id={{ boardlist.id }}" class="del"><img src="/asset/images/recycle.png"></a></td>
 			</tr>
 			{% endfor %}
 		</table>
