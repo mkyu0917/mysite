@@ -38,32 +38,31 @@ def boardWrite_Save(request):
 
 def boardView(request):
 
-    boardViews = Board.objects.filter(id=request.GET.get('id')).get()
-   # print(boardViews)
+    boardViews = Board.objects.get(id=request.GET.get('id'))
+    print('시작',boardViews)
 
     context = {'boardViews':boardViews}
 
     return render(request,'board/view.html',context)
 
 def boardModify(request):
-    boardModify = Board.objects.filter(id=request.GET.get('id')).get()
+    boardModify = Board.objects.get(id=request.GET.get('id'))
     context = {'boardModify':boardModify}
-    print(context)
+    print("asdfefasef",context)
     return render(request,'board/modify.html',context)
 
 def Modify_Save(request): #id값을 받아와야지
         #print(request.POST)
 
-        Modify_Saves_id = request.POST['id']
-        Modify_Save=Board.objects.filter(id=Modify_Saves_id)
-        Modify_Save.title = request.POST['title']
-        Modify_Save.content = request.POST['content']
+    Modify_Saves_id = request.POST['id']
+    Modify_Save=Board.objects.get(id=Modify_Saves_id)
+    Modify_Save.title = request.POST['title']
+    Modify_Save.content = request.POST['content']
 
-        Modify_Save.update()
-        # Modify_Save.id = request.POST['id']
-        # # Board.objects.filter(id=Modify_Saves_id).filter(title=Modify_Saves_title).filter(content=Modify_Saves_content).update()
+    Modify_Save.save()
+    #Board.objects.filter(id=Modify_Saves_id).filter(title=Modify_Saves_title).filter(content=Modify_Saves_content).update()
 
-        return HttpResponseRedirect('/board')
+    return HttpResponseRedirect('/board/view?id='+Modify_Saves_id)
 
 
 
