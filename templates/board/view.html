@@ -4,30 +4,32 @@
 {% endblock %}
 
 {% block content %}
-		<div id="board" class="board-form">
-		   <table class="tbl-ex">
-			  <tr>
-				 <th colspan="2">글보기</th>
-			  </tr>
-			  <tr>
-				 <td class="label">제목</td>
-				 <td>{{boardViews.title}}</td>
-			  </tr>
-			  <tr>
-				 <td class="label">내용</td>
-				 <td>
-					<div class="view-content">
-					   {{boardViews.content|linebreaksbr}}
-					</div>
-				 </td>
-			  </tr>
-		   </table>
-		   <div class="bottom">
-			  <a href="/board">글목록</a>
-			{% if request.session.authuser.id == boardViews.user_id %}
-		   <div class="bottom">
-			  <a href="/board/modify?id={{boardViews.id}}">글수정</a>
-			 {% endif %}
-		   </div>
-		</div>
+<div id="board" class="board-form">{% csrf_token %}
+
+   <table class="tbl-ex">
+	  <tr>
+		 <th colspan="2">글보기</th>
+	  </tr>
+	  <tr>
+		 <td class="label">제목</td>
+		 <td>{{boardViews.title}}</td>
+	  </tr>
+	  <tr>
+		 <td class="label">내용</td>
+		 <td>
+			<div class="view-content">
+			   {{boardViews.content|linebreaksbr}}
+			</div>
+		 </td>
+	  </tr>
+   </table>
+   <div class="bottom">
+	  <a href="/board">글목록</a>
+
+	{% if request.session.authuser.id == boardViews.user_id %}
+   	  <a href="/board/modify?id={{boardViews.id}}">글수정</a>
+	{% endif %}
+   </div>
+</div>
+
 {% endblock %}
