@@ -11,5 +11,6 @@ class Board(models.Model):
     regdate = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE) # 주키삭제되면 전부삭제됨
     name = models.CharField(max_length=30)
+
     def __str__(self):
         return "Board( %s, %s, %d, %s, %d, %s)" % (self.title, self.content, self.hit, str(self.regdate), self.user.id, self.name)

@@ -34,10 +34,16 @@ def boardWrite_Save(request):
 
 
 def boardView(request):
+    pk = request.GET['id'] # 아디를 받음여
+    boardData = Board.objects.get(id=pk) #id값과 같은 객체데이타를 부름
+    Board.objects.filter(id=pk).update(hit=boardData.hit + 1)#아이디와 같은 값
 
     boardViews = Board.objects.get(id=request.GET.get('id'))
     context = {'boardViews':boardViews}
     return render(request,'board/view.html',context)
+
+
+
 
 def boardModify(request):
 
@@ -57,13 +63,9 @@ def Modify_Save(request):
 
 
 def list_Delete(request):
-    Board_Delete=Board.objects.get(id=request.GET.get('id'))
-    list_Delete.id = request.GET.get('id')
-    Board_Delete.id=request.GET.get('id')
 
-    #print('진짜아닌가보네',Board_Delete.id)
-    if list_Delete.id == Board_Delete.id: #list페이지에서 받은 글 id와 보드테이블에서 받은아이디가 같으면
-        Board.objects.get(id=request.GET.get('id')).delete() #아이디와 관련된 모든걸 지움
-        return HttpResponseRedirect('/board')
+    list_Delete= request.GET.get('id')
+    Board.objects.filter(id=list_Delete).delete()
 
+    return HttpResponseRedirect('/board')
 

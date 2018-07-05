@@ -33,7 +33,7 @@ urlpatterns = [ #url에서 post 방식으로 보내는 것들은 마지막에url
     path('admin/', admin.site.urls), #상대경로는 맨앞에 /가 없읍니다. #관리자페이지
 
     #guestbook 부분패턴
-    path('guestbook/',guestbook_views.guestbook), #방명록 페이지
+    path('guestbook/',guestbook_views.guestbook_page), #방명록 페이지
     path('guestbook/add',guestbook_views.add), # 방명록 추가
     path('guestbook/deleteform',guestbook_views.deleteformPage), #list에서 deleteform주소로 갔을때 deleteformPage함수실행
     path('guestbook/delete',guestbook_views.delete), #deleteform 에서 delete실행하고 guestbook으로 리턴
@@ -57,5 +57,9 @@ urlpatterns = [ #url에서 post 방식으로 보내는 것들은 마지막에url
     path('board/Modify_Save',board_views.Modify_Save),
 
     # delete부분패턴
-    path('board/list_Delete',board_views.list_Delete)
+    path('board/list_Delete',board_views.list_Delete),
+
+
+    # hit부분패턴
+
 ]

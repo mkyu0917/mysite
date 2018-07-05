@@ -1,13 +1,12 @@
 {% extends "../base.html" %}
 {% load mathfilters %}
-{% load endless %}
 {% block css_link %}
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
 	<div id="board">
 		<form id="search_form" action="/board/view" method="post">
-			<input type="text" id="kwd" name="kwd" value="">
+
 			<input type="submit" value="찾기">
 		</form>
 
@@ -28,16 +27,16 @@
 
 					{% if request.session.authuser is not None %}
 					<a href="/board/view?id={{ boardlist.id }}">
-					 {% endif %} {{ boardlist.title }}</a></td><!--어류동-->
+					   {% endif %} {{ boardlist.title }}</a></td><!--어류동-->
 
 
 				<td>{{ boardlist.name }}</td>
-				<td>
-					{}
-					{{ boardlist.hit  }}
-				</td>
+				<td>{{ boardlist.hit  }}</td>
 				<td>{{ boardlist.regdate|date:'Y-m-d H:i:s' }}</td>
-				<td><a href="/board/list_Delete?id={{ boardlist.id }}" class="del"><img src="/asset/images/recycle.png"></a></td>
+
+				{% if request.session.authuser.id is boardlist.user.id %}
+				<td><a href="/board/list_Delete?id={{ boardlist.id }}" class="del"></a></td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 		</table>
