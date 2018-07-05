@@ -47,7 +47,7 @@ def boardModify(request):
 
 def Modify_Save(request):
 
-    Modify_Saves_id = request.POST['id']
+    Modify_Saves_id = request.POST.get('id')
     Modify_Save=Board.objects.get(id=Modify_Saves_id)
     Modify_Save.title = request.POST['title']
     Modify_Save.content = request.POST['content']

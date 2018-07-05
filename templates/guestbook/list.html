@@ -4,7 +4,6 @@
 <link href="/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 {% endblock %}
  {% block content %}
-<div id="content">
 	<div id="guestbook">
 		<form action="/guestbook/add" method="post">{% csrf_token %} <!--forbidden 403 error 처리tokens-->
 			<input type="hidden" name="a" value="insert">
@@ -44,5 +43,4 @@
 			</li>
 		</ul>
 	</div>
-</div>
 {% endblock %}

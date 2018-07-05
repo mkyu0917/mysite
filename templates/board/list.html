@@ -1,13 +1,10 @@
 {% extends "../base.html" %}
 {% load mathfilters %}
-
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+{% load endless %}
 {% block css_link %}
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
-<div id="content">
 	<div id="board">
 		<form id="search_form" action="/board/view" method="post">
 			<input type="text" id="kwd" name="kwd" value="">
@@ -25,17 +22,21 @@
 			</tr>
 			{% for boardlist in boardLists %}
 			<tr>
-				<td>{{boardlist.id}}</td>
-				<td>{% if request.session.authuser is not None %}
+				<td>{{ boardLists.count | add:1 | sub:forloop.counter }}</td>
+
+				<td>
+
+					{% if request.session.authuser is not None %}
 					<a href="/board/view?id={{ boardlist.id }}">
-					 {% endif %}{{ boardlist.title }}</a>
+					 {% endif %} {{ boardlist.title }}</a></td><!--어류동-->
 
 
-				</td><!--어류동-->
 				<td>{{ boardlist.name }}</td>
-				<td>{{ boardlist.hit  }}</td>
+				<td>
+					{}
+					{{ boardlist.hit  }}
+				</td>
 				<td>{{ boardlist.regdate|date:'Y-m-d H:i:s' }}</td>
-					{% if request.session.authuser}
 				<td><a href="/board/list_Delete?id={{ boardlist.id }}" class="del"><img src="/asset/images/recycle.png"></a></td>
 			</tr>
 			{% endfor %}
@@ -51,5 +52,4 @@
 		</div>
 		{% endif %}
 	</div>
-</div>
 {% endblock %}

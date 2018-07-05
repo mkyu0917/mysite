@@ -54,7 +54,7 @@ urlpatterns = [ #url에서 post 방식으로 보내는 것들은 마지막에url
 
     #modify부분패턴
     path('board/modify', board_views.boardModify),
-    path('board/modify_Save',board_views.Modify_Save),
+    path('board/Modify_Save',board_views.Modify_Save),
 
     # delete부분패턴
     path('board/list_Delete',board_views.list_Delete)
