@@ -69,3 +69,11 @@ def list_Delete(request):
 
     return HttpResponseRedirect('/board')
 
+def list_Find(request):
+    #print(request.POST)
+    list_find= request.POST.get('find')
+    print("dasdf",list_find)
+    if list_find:
+        list_finds = Board.objects.filter(name=list_find)
+        context={'list_finds',list_finds}
+        print(context)

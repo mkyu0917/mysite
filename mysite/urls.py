@@ -59,7 +59,7 @@ urlpatterns = [ #url에서 post 방식으로 보내는 것들은 마지막에url
     # delete부분패턴
     path('board/list_Delete',board_views.list_Delete),
 
-
-    # hit부분패턴
+    #find
+    path('board/list_Find',board_views.list_Find)
 
 ]
